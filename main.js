@@ -15,27 +15,19 @@ function decode(input) {
     if(res = check(input, c)) {
       input = res.newstr;
       m += l;
-      m = Math.max(m, 1); 
-      n += m * Math.pow(10000, res.val);
+      n += Math.max(m, 1) * Math.pow(10000, res.val);
       m = l = 0;
-      continue;
     }
-    
-    if(res = check(input, b)) {
+    else if(res = check(input, b)) {
       input = res.newstr;
-      l = Math.max(l, 1); 
-      m += l * Math.pow(10, res.val);
+      m += Math.max(l, 1) * Math.pow(10, res.val);
       l = 0;
-      continue;
     }
-    
-    if(res = check(input, a)) {
+    else if(res = check(input, a)) {
       input = res.newstr;
       l = l * 10 + res.val;
-      continue;
     }
-    
-    return 0;
+    else return 0;
   }
   
   return n + m + l;
@@ -44,7 +36,11 @@ function decode(input) {
 function check(str, arr) {
   for(var i=0; i<arr.length; i++) {
     if(str.startsWith(arr[i].ch))
-      return {ch:arr[i].ch, val:arr[i].val, newstr:str.substring(arr[i].ch.length)};
+      return {
+        ch : arr[i].ch,
+        val : arr[i].val,
+        newstr : str.substring(arr[i].ch.length)
+     };
   }
   return null;
 }
