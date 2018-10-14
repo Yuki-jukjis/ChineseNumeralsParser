@@ -17,8 +17,8 @@ function decode(input) {
     // 文字列の先頭が"万",...,"無量大数"だった場合
     if(res = check(input, c)) {
       input = res.newstr;
-      n += Math.max(m + l, 1) * Math.pow(10000, res.val);
-      m = l = 0;
+      n += Math.max(l + m, 1) * Math.pow(10000, res.val);
+      l = m = 0;
     }
     // "十","百","千"だった場合
     else if(res = check(input, b)) {
