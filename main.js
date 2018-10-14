@@ -13,24 +13,19 @@ window.onload = function() {
 function decode(input) {
   var n=0, m=0, l=0;
   
-  while(0 < input.length) {
-    var res;
-    
+  for(var res; 0 < input.length; input=res.newstr) {
     // 文字列の先頭が"万",...,"無量大数"だった場合
     if(res = search(input, c)) {
-      input = res.newstr;
       n += Math.max(l + m, 1) * Math.pow(10000, res.val);
       l = m = 0;
     }
     // "十","百","千"だった場合
     else if(res = search(input, b)) {
-      input = res.newstr;
       m += Math.max(l, 1) * Math.pow(10, res.val);
       l = 0;
     }
     // "〇","一",...,"九"だった場合
     else if(res = search(input, a)) {
-      input = res.newstr;
       l = l * 10 + res.val;
     }
     else return 0;
@@ -66,9 +61,8 @@ function encode(num) {
 
 function encode2(num) {
   var str = "";
-  while(0 < num) {
+  for(; 0 < num; num = Math.floor(num / 10)) {
     str = search2(num % 10, a) + str;
-    num = Math.floor(num / 10);
   }
   return str;
 }
