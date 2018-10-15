@@ -1,4 +1,4 @@
-﻿var a = [
+﻿var singleNumsTable = [
   {ch:"〇", val:0},
   {ch:"零", val:0},
   {ch:"0", val:0},
@@ -46,7 +46,7 @@
   {ch:"９", val:9},
 ];
 
-var b = [
+var lowerExpsTable = [
   {ch:"十", val:1},
   {ch:"拾", val:1},
   {ch:"什", val:1},
@@ -58,7 +58,7 @@ var b = [
   {ch:"仟", val:3},
 ];
 
-var c = [
+var upperExpsTable = [
   {ch:"万", val:1},
   {ch:"萬", val:1},
   {ch:"億", val:2},
