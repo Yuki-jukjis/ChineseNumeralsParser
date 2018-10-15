@@ -18,14 +18,14 @@ function decode(input) {
   for(var res; 0 < input.length; input=res.newstr) {
     // 文字列の先頭が"万",...,"無量大数"だった場合
     if(res = search(input, upperExpsTable)) {
-      if (Math.pow(10000, res.val) <= terminalBuf)
+      if (0 < terminalBuf % Math.pow(10000, res.val))
         $("error").innerText+="error";
       terminalBuf += Math.max(lowerFactorTmpBuf + upperFactorTmpBuf, 1) * Math.pow(10000, res.val);
       lowerFactorTmpBuf = upperFactorTmpBuf = 0;
     }
     // "十","百","千"だった場合
     else if(res = search(input, lowerExpsTable)) {
-      if (Math.pow(10, res.val) <= upperFactorTmpBuf)
+      if (0 < upperFactorTmpBuf % Math.pow(10, res.val))
         $("error").innerText+="error";
       upperFactorTmpBuf += Math.max(lowerFactorTmpBuf, 1) * Math.pow(10, res.val);
       lowerFactorTmpBuf = 0;
