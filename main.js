@@ -11,27 +11,27 @@ window.onload = function() {
 
 // 漢数字表記を数値に変換
 function decode(input) {
-  var n=0, m=0, l=0;
+  var terminalBuf=0, upperFactorTmpBuf=0, lowerFactorTmpBuf=0;
   
   for(var res; 0 < input.length; input=res.newstr) {
     // 文字列の先頭が"万",...,"無量大数"だった場合
     if(res = search(input, upperExpsTable)) {
-      n += Math.max(l + m, 1) * Math.pow(10000, res.val);
-      l = m = 0;
+      terminalBuf += Math.max(lowerFactorTmpBuf + upperFactorTmpBuf, 1) * Math.pow(10000, res.val);
+      lowerFactorTmpBuf = upperFactorTmpBuf = 0;
     }
     // "十","百","千"だった場合
     else if(res = search(input, lowerExpsTable)) {
-      m += Math.max(l, 1) * Math.pow(10, res.val);
-      l = 0;
+      upperFactorTmpBuf += Math.max(lowerFactorTmpBuf, 1) * Math.pow(10, res.val);
+      lowerFactorTmpBuf = 0;
     }
     // "〇","一",...,"九"だった場合
     else if(res = search(input, singleNumsTable)) {
-      l = l * 10 + res.val;
+      lowerFactorTmpBuf = lowerFactorTmpBuf * 10 + res.val;
     }
     else return 0;
   }
   
-  return n + m + l;
+  return terminalBuf + upperFactorTmpBuf + lowerFactorTmpBuf;
 }
 
 // 与えられた配列（文字列と値の対応を格納）の中から、
