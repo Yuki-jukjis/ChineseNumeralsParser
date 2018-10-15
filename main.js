@@ -15,17 +15,17 @@ function decode(input) {
   
   for(var res; 0 < input.length; input=res.newstr) {
     // 文字列の先頭が"万",...,"無量大数"だった場合
-    if(res = search(input, c)) {
+    if(res = search(input, upperExpsTable)) {
       n += Math.max(l + m, 1) * Math.pow(10000, res.val);
       l = m = 0;
     }
     // "十","百","千"だった場合
-    else if(res = search(input, b)) {
+    else if(res = search(input, lowerExpsTable)) {
       m += Math.max(l, 1) * Math.pow(10, res.val);
       l = 0;
     }
     // "〇","一",...,"九"だった場合
-    else if(res = search(input, a)) {
+    else if(res = search(input, singleNumsTable)) {
       l = l * 10 + res.val;
     }
     else return 0;
@@ -52,9 +52,9 @@ function encode(num) {
   var str = "";
   for(var i=0; 0 < num; num = Math.floor(num / 10), i++) {
     if(num % 10 == 0) continue;
-    if(i % 4 == 0) str = search2(Math.floor(i / 4), c) + str;
-    str = search2(i % 4, b) + str;
-    if(num % 10 != 1 || i % 4 == 0) str = search2(num % 10, a) + str;
+    if(i % 4 == 0) str = search2(Math.floor(i / 4), upperExpsTable) + str;
+    str = search2(i % 4, lowerExpsTable) + str;
+    if(num % 10 != 1 || i % 4 == 0) str = search2(num % 10, singleNumsTable) + str;
   }
   return str;
 }
@@ -62,7 +62,7 @@ function encode(num) {
 function encode2(num) {
   var str = "";
   for(; 0 < num; num = Math.floor(num / 10)) {
-    str = search2(num % 10, a) + str;
+    str = search2(num % 10, singleNumsTable) + str;
   }
   return str;
 }
