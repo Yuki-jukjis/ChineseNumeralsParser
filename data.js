@@ -1,4 +1,11 @@
-﻿var singleNumsTable = [
+﻿var ligatures = [
+  {from:"廿", to:"二十"},
+  {from:"卅", to:"三十"},
+  {from:"卌", to:"四十"},
+  {from:"皕", to:"二百"}
+];
+
+var singleNums = [
   {ch:"〇", val:0},
   {ch:"零", val:0},
   {ch:"0", val:0},
@@ -46,7 +53,7 @@
   {ch:"９", val:9},
 ];
 
-var lowerExpsTable = [
+var lowerExps = [
   {ch:"十", val:1},
   {ch:"拾", val:1},
   {ch:"什", val:1},
@@ -58,7 +65,7 @@ var lowerExpsTable = [
   {ch:"仟", val:3},
 ];
 
-var upperExpsTable = [
+var upperExps = [
   {ch:"万", val:1},
   {ch:"萬", val:1},
   {ch:"億", val:2},
